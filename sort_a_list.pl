@@ -65,3 +65,17 @@
   divide(Elem, [Head|R], [Head|Lower], Higher):-
   Head =< Elem,
   divide(Elem, R, Lower, Higher).
+%
+%
+% List the primenumbers X to Y
+%
+%
+  listDivisors(_, 1, [1]).
+  listDivisors(X, Y, [Y|R]):- Y > 1,
+  Y2 is Y-1,
+  listDivisors(X,Y2, R),
+  0 is X mod Y.
+  listDivisors(X, Y, R):- Y > 1,
+  Y2 is Y-1,
+  listDivisors(X,Y2, R),
+  Z is X mod Y, Z \== 0.
