@@ -8,21 +8,19 @@ draw_square :-
 	send(Window, size, size(MaxX, MaxY)),
 	send(Window, open),
 	draw_lines(Window),
-
 	
 	MX1 is (MaxX div 2 + 59), MY1 is (MaxY div 2 - 20),
-	draw_viewer(Window, MX1, MY1),
+	draw_cannibal(Window, MX1, MY1),
 	MX2 is (MaxX div 2 + 109), MY2 is MY1,
-	draw_viewer(Window, MX2, MY2),
+	draw_cannibal(Window, MX2, MY2),
 	MX3 is (MaxX div 2 + 159), MY3 is MY1,
-	draw_viewer(Window, MX3, MY3),
+	draw_cannibal(Window, MX3, MY3),
 	CX1 is MX1, CY1 is (MaxY div 2 + 52),
-	draw_pensil(Window, CX1, CY1),
+	draw_angel(Window, CX1, CY1),
 	CX2 is MX2, CY2 is CY1,
-	draw_pensil(Window, CX2, CY2),
+	draw_angel(Window, CX2, CY2),
 	CX3 is MX3, CY3 is CY1,
-	draw_pensil(Window, CX3, CY3).
-	
+	draw_angel(Window, CX3, CY3).
 
 	
 	draw_lines(Window) :-
@@ -45,12 +43,12 @@ draw_square :-
 		 send(Pa2, append, point(X22, Y22))
 		).
 		
-	draw_viewer(Window, X, Y) :-
+	draw_cannibal(Window, X, Y) :-
 		send(Window, display,
-		  new(Bitmap, bitmap('32x32/cannibal.xpm')), point(X, Y)),
+		  new(bitmap('32x32/cannibal.xpm')), point(X, Y)),
 		  sleep(1).
 		  
-	draw_pensil(Window, X, Y) :-
+	draw_angel(Window, X, Y) :-
 		send(Window, display,
-		  new(Bitmap, bitmap('32x32/pensil.xpm')), point(X, Y)),
+		  new(bitmap('32x32/angel.xpm')), point(X, Y)),
 		  sleep(1).
