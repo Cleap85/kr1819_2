@@ -49,10 +49,68 @@ path(Ini, Fin, Visited, [move(M, C, Side)|Path]) :-
   mov( move(M, C, Side), Ini, Temp),
   \+ member(Temp, Visited),
   path(Temp, Fin, [Temp|Visited], Path).
+  
+
+  
+% INTEGRATE GRAPHICS
+
+misPos([point(9, 180), point(59, 180), point(109, 180), point(259, 180), point(309, 180), point(359, 180)]).
+canPos([point(9, 220), point(59, 220), point(109, 220), point(259, 220), point(309, 220), point(359, 220)]).
+ 
+mis([0,0,0,1,1,1]).
+can([0,0,0,1,1,1]).
+
+
+% rotateLeft(List, N, R).
+
+rotateLeft(List, 0, List).
+rotateLeft([Head|Tail], N, R2) :-
+	N > 0, N2 is N-1,
+	append(Tail, [Head], R),
+	rotateLeft(R, N2, R2).
+  
+% rotateRight(List, N, R).
+
+rotateRight(List, 0, List).
+rotateRight(List, N, R) :-
+	N > 0, N2 is N-1,
+	append(L1, [Last], List),
+	rotateRight([Last|L1], N2, R).
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+% posRight(RX1, RX2, RX3).
+xPosRight(59, 109, 159). % MaxX div 2 + 59
+YPosMis(20). % MaxY div 2 - 20
+yPosCan(20). % MaxY div 2 + 20
+xPosLeft(91, 141, 191).
+
+% mov(mov(M, C, Dir), MisPosLeft, MisPosRight, CanPosLeft, CanPosRight).
+
+mov(mov(M, C, left), MisPosLeft, MisPosRight, CanPosLeft, CanPosRight) :-
+	lenght(L2, M),
+	append(L1, L2, MisPosLeft),
 
 
 
 
-% cannibalsleft = CL 	cannibalsright = CR
-% missionariesleft = ML 	missionariesright = MR
-% Boat = B
+
+
+
+
+
+
+
+
+
+
+
