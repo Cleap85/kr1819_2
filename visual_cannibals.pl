@@ -41,6 +41,7 @@ draw_square :-
 	CX3Left is MX3Left, CY3Left is CY1Left,
 	draw_cannibal(Window, CX3Left, CY3Left, _).
 
+% Lines
 	
 	draw_lines(Window) :-
 	window_size(MaxX, MaxY),
@@ -62,12 +63,12 @@ draw_square :-
 		 send(Pa2, append, point(X22, Y22))
 		).
 		
-	draw_cannibal(Window, X, Y, Bitmap) :-
-		send(Window, display,
-		  new(Bitmap, bitmap('32x32/cannibal.xpm')), point(X, Y)),
-		  sleep(1).
+draw_cannibal(Window, X, Y, Bitmap) :-
+	send(Window, display,
+	 new(Bitmap, bitmap('32x32/cannibal.xpm')), point(X, Y)),
+	 sleep(1).
 		  
-	draw_angel(Window, X, Y, Bitmap) :-
-		send(Window, display,
-		  new(Bitmap, bitmap('32x32/angel.xpm')), point(X, Y)),
-		  sleep(1).
+draw_angel(Window, X, Y, Bitmap) :-
+	send(Window, display,
+	new(Bitmap, bitmap('32x32/angel.xpm')), point(X, Y)),
+	sleep(1).
