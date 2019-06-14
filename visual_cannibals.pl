@@ -9,39 +9,19 @@ draw_square :-
 	send(Window, open),
 	draw_lines(Window),
 	
-% Right side
-	
-	MX1Right is (MaxX div 2 + 59), MY1Right is (MaxY div 2 - 20),
-	draw_angel(Window, MX1Right, MY1Right, _),
-	MX2Right is (MaxX div 2 + 109), MY2Right is MY1Right,
-	draw_angel(Window, MX2Right, MY2Right, _),
-	MX3Right is (MaxX div 2 + 159), MY3Right is MY1Right,
-	draw_angel(Window, MX3Right, MY3Right, _),
-	
-	CX1Right is MX1Right, CY1Right is (MaxY div 2 + 52),
-	draw_cannibal(Window, CX1Right, CY1Right, _),
-	CX2Right is MX2Right, CY2Right is CY1Right,
-	draw_cannibal(Window, CX2Right, CY2Right, _),
-	CX3Right is MX3Right, CY3Right	is CY1Right,
-	draw_cannibal(Window, CX3Right, CY3Right, _),
-	
-% Left side
-	
-    MX1Left is (MaxX div 2 - 91), MY1Left is (MaxY div 2 - 20),
-	draw_angel(Window, MX1Left, MY1Left, _),
-	MX2Left is (MaxX div 2 - 141), MY2Left is MY1Left,
-	draw_angel(Window, MX2Left, MY2Left, _),
-	MX3Left is (MaxX div 2 - 191), MY3Left is MY1Left,
-	draw_angel(Window, MX3Left, MY3Left, _),
-	
-	CX1Left is MX1Left, CY1Left is (MaxY div 2 + 52),
-	draw_cannibal(Window, CX1Left, CY1Left, _),
-	CX2Left is MX2Left, CY2Left is CY1Left,
-	draw_cannibal(Window, CX2Left, CY2Left, _),
-	CX3Left is MX3Left, CY3Left is CY1Left,
-	draw_cannibal(Window, CX3Left, CY3Left, _).
+	MX1 is (MaxX div 2 + 59), MY1 is (MaxY div 2 - 20),
+	draw_cannibal(Window, MX1, MY1),
+	MX2 is (MaxX div 2 + 109), MY2 is MY1,
+	draw_cannibal(Window, MX2, MY2),
+	MX3 is (MaxX div 2 + 159), MY3 is MY1,
+	draw_cannibal(Window, MX3, MY3),
+	CX1 is MX1, CY1 is (MaxY div 2 + 52),
+	draw_angel(Window, CX1, CY1),
+	CX2 is MX2, CY2 is CY1,
+	draw_angel(Window, CX2, CY2),
+	CX3 is MX3, CY3 is CY1,
+	draw_angel(Window, CX3, CY3).
 
-% Lines
 	
 	draw_lines(Window) :-
 	window_size(MaxX, MaxY),
@@ -63,12 +43,12 @@ draw_square :-
 		 send(Pa2, append, point(X22, Y22))
 		).
 		
-draw_cannibal(Window, X, Y, Bitmap) :-
-	send(Window, display,
-	 new(Bitmap, bitmap('32x32/cannibal.xpm')), point(X, Y)),
-	 sleep(1).
+	draw_cannibal(Window, X, Y) :-
+		send(Window, display,
+		  new(bitmap('32x32/cannibal.xpm')), point(X, Y)),
+		  sleep(1).
 		  
-draw_angel(Window, X, Y, Bitmap) :-
-	send(Window, display,
-	new(Bitmap, bitmap('32x32/angel.xpm')), point(X, Y)),
-	sleep(1).
+	draw_angel(Window, X, Y) :-
+		send(Window, display,
+		  new(bitmap('32x32/angel.xpm')), point(X, Y)),
+		  sleep(1).

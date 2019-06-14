@@ -1,6 +1,9 @@
 :- use_module(library(pce)).
 
 
+% to show the graphic in Prolog write hexagon.
+
+hexagon :- draw_hexa(200, 200, 100).
 
 draw_hexa(X, Y, Len) :-
 	new(Window, picture('My Window Hexagon')),

@@ -1,6 +1,8 @@
 :- use_module(library(pce)).
 
+% to show the graphic in Prolog write triangle.
 
+triangle :- draw_tri(200, 200, 100).
 
 draw_tri(X, Y, Len) :-
 	new(Window, picture('My Window Triangle')),

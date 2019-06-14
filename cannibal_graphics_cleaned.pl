@@ -94,12 +94,12 @@ moveGraphic(Window, state(MisGraphState, CanGraphState), [move(Mis, Can, left)| 
   deleteElements(ElementsList),
   % Paint new State
   misPos(MisPos), canPos(CanPos),
-  paintState(state(NewMisGraphState, NewCanGraphState), MisPos, CanPos, Window, _),  
+  paintState(state(NewMisGraphState, NewCanGraphState), MisPos, CanPos, Window, NewElements),  
   % Delay time
-  sleep(1),
+  sleep(2),
   % write(state(NewMisGraphState, NewCanGraphState)),
   % write(nl),
-  moveGraphic(Window, state(NewMisGraphState, NewCanGraphState), Tail).
+  moveGraphic(Window, state(NewMisGraphState, NewCanGraphState), Tail, NewElements).
 
 moveGraphic(Window, state(MisGraphState, CanGraphState), [move(Mis, Can, right)| Tail], ElementsList):-
   rotateRight(MisGraphState, Mis, NewMisGraphState),
@@ -108,17 +108,17 @@ moveGraphic(Window, state(MisGraphState, CanGraphState), [move(Mis, Can, right)|
   deleteElements(ElementsList),
   % Paint new State
   misPos(MisPos), canPos(CanPos),
-  paintState(state(NewMisGraphState, NewCanGraphState), MisPos, CanPos, Window, _),
-  paintState(state(NewMisGraphState, NewCanGraphState), MisPos, CanPos, Window, _),
+  paintState(state(NewMisGraphState, NewCanGraphState), MisPos, CanPos, Window, NewElements),
   % Delay time
-  sleep(1),
+  sleep(2),
   % write(state(NewMisGraphState, NewCanGraphState)),
   % write(nl),
-  moveGraphic(Window, state(NewMisGraphState, NewCanGraphState), Tail). 
+  moveGraphic(Window, state(NewMisGraphState, NewCanGraphState), Tail, NewElements). 
 
-solution :-  path(state(3,3,right), state(0,0,_), [], P), draw_square(Window), moveGraphic(Window, state([0,0,0,1,1,1], [0,0,0,1,1,1]), P, []). 
+solution :-  P=[move(1,1,left),move(1,0,right),move(0,2,left),move(0,1,right),move(2,0,left),move(1,1,right),move(2,0,left),move(0,1,right),move(0,2,left),move(0,1,right),move(0,2,left)], 
+  draw_square(Window), paintInitialState(Window, ElementsList), moveGraphic(Window, state([0,0,0,1,1,1], [0,0,0,1,1,1]), P, ElementsList). 
 
-solution :-  path(state(3,3,right), state(0,0,_), [], P), draw_square(Window), moveGraphic(Window, state([0,0,0,1,1,1], [0,0,0,1,1,1]), P). 
+
 deleteElements([]).
 deleteElements([Head|Tail]):-
   free(Head),
@@ -132,6 +132,11 @@ paintState(state([HeadMis|TailMis], [HeadCan|TailCan]),
   drawCan(Window, HeadCan, HeadPosCan, BitmapCan),
   paintState(state(TailMis, TailCan), TailPosMis, TailPosCan, Window, BitmapList).
   
+  
+paintInitialState(Window, ElementsList) :- 
+  misPos(MisPos), canPos(CanPos),
+  paintState(state([0,0,0,1,1,1], [0,0,0,1,1,1]), MisPos, CanPos, Window, ElementsList),
+  sleep(2). 
   
 paintOneState :- draw_square(Window), 
   misPos(MisPos), canPos(CanPos),
